@@ -1,14 +1,17 @@
 import { makeAutoObservable } from "mobx"
 
 export class MobXState {
-    myObservableState: string
+    myObservableState: string = "My value";
 
     constructor() {
-        this.myObservableState = "My value"
-        makeAutoObservable(this)
+        makeAutoObservable(this);
     }
 
     get myComputedValue(): string {
         return `Length: ${this.myObservableState.length}`
+    }
+
+    updateObservable(newValue: string){
+        this.myObservableState = newValue;
     }
 }

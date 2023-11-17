@@ -5,10 +5,10 @@ import { MobXState } from '@/stores/MobxStore';
 import { RenderCounter, Cloud, CircleMessageVariants, CircleMessage, ArrowWithMessage } from "@/components";
 
 export const MobXPattern = observer(() => {
-    const [state] = useState(() => new MobXState())
+    const [state] = useState(() => new MobXState());
 
     const updateObservableState = () => {
-        state.myObservableState = "New value";
+        state.updateObservable("New value");
     }
 
     return (
@@ -16,22 +16,22 @@ export const MobXPattern = observer(() => {
             <div className="grid grid-cols-8 gap-8">
                 <ArrowWithMessage message="events" />
                 <div className="flex flex-col items-center gap-4">
-                    <Cloud message="Click me!" onClick={updateObservableState} />
+                    <Cloud onClick={updateObservableState} >Click me!</Cloud>
                     <CircleMessage variant={CircleMessageVariants.orange}>Actions</CircleMessage>
                 </div>
                 <ArrowWithMessage message="update" />
                 <div className="flex flex-col items-center gap-4">
-                    <Cloud message={state.myObservableState} />
+                    <Cloud>{state.myObservableState}</Cloud>
                     <CircleMessage variant={CircleMessageVariants.blue}>Observable state</CircleMessage>
                 </div>
                 <ArrowWithMessage message="notify" />
                 <div className="flex flex-col items-center gap-4">
-                    <Cloud message={state.myComputedValue} />
+                    <Cloud>{state.myComputedValue}</Cloud>
                     <CircleMessage variant={CircleMessageVariants.green}>Computed values</CircleMessage>
                 </div>
                 <ArrowWithMessage message="trigger" />
                 <div className="flex flex-col items-center gap-4">
-                    <Cloud message={<RenderCounter />} />
+                    <Cloud><RenderCounter /></Cloud>
                     <CircleMessage variant={CircleMessageVariants.red}>Side-Effect (like render)</CircleMessage>
                 </div>
             </div>
